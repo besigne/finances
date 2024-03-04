@@ -1,12 +1,26 @@
 'use client'
 import React from 'react';
-import { Box, Paper } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 
 const HomeScreen: React.FC = () => {
 
     return (
         <Box style={{ position: 'relative', height: '60vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            here it is
+            <Box>
+                <Box style={{display: 'flex'}}>
+                    <Box>
+                        Teste
+                    </Box>
+                    <Divider orientation="vertical" flexItem/>
+                    <Box>
+                        ajdfask
+                    </Box>
+                </Box>
+                <Divider />
+                <Box>
+                    Outro
+                </Box>
+            </Box>
         </Box>
     )
 }
