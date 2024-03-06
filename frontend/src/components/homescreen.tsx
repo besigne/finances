@@ -1,59 +1,69 @@
 'use client'
 import React from 'react';
-import { Box, Divider, List, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
+import { Box, Tab, Tabs } from '@mui/material';
 import { SavingsOutlined, MoneyOffOutlined, AlignVerticalTopOutlined, AlignVerticalBottomOutlined } from '@mui/icons-material';
-import Caurosel from './carousel';
+import { CustomTabPanel, allyProps } from './home/functions';
+import { BarChart } from '@mui/x-charts';
+import { months } from './enum/enums';
 
 const HomeScreen: React.FC = () => {
-    const [selected, setselected] = React.useState(1);
+  const [selected, setselected] = React.useState(1);
+  const [value, setValue] = React.useState(0);
 
-    const handleChange = (event: number) => {
-        setselected(event);
-      };
-    
-    return (
-        <Box className="row m-4 p-2" sx={{backgroundColor:"#1e1e1e", borderRadius: '10px'}}>
-            <Box className={"col-md-3 ms-auto p-3"} sx={{backgroundColor:"#242424", borderRadius: '10px'}}>
-                <Typography>
-                    General View
-                </Typography>
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
 
-                <List component={'nav'}>
+  return (
+    <Box className="row m-4 p-2" sx={{ backgroundColor: "#1e1e1e", borderRadius: '10px' }}>
+      <Tabs value={value} onChange={handleChange}>
+        <Tab label="Income" icon={<AlignVerticalBottomOutlined />} iconPosition='start' {...allyProps(0)} />
+        <Tab label="Spending" icon={<AlignVerticalTopOutlined />} iconPosition='start' {...allyProps(1)} />
+        <Tab label="Investments" icon={<SavingsOutlined />} iconPosition='start' {...allyProps(2)} />
+        <Tab label="Debts" icon={<MoneyOffOutlined />} iconPosition='start' {...allyProps(3)} />
+      </Tabs>
 
-                    <ListItemButton onClick={() =>handleChange(1)}>
-                        <ListItemIcon>
-                            <AlignVerticalBottomOutlined />
-                        </ListItemIcon>
-                        <ListItemText primary="Average monthly income" />
-                    </ListItemButton>  
+      <CustomTabPanel value={value} index={0}>
+        <BarChart
+          sx={{ backgroundColor: "#242424", borderRadius: '10px' }}
+          xAxis={[{ scaleType: 'band', data: months }]}
+          series={[{ data: [4000, 3000, 5000, 600] }]}
+          colors={['#6aa84f']}
+          height={250}
+        />
+      </CustomTabPanel>
 
-                    <ListItemButton onClick={() =>handleChange(2)}>
-                        <ListItemIcon>
-                            <AlignVerticalTopOutlined />
-                        </ListItemIcon>
-                        <ListItemText primary="Average monthly speding" />    
-                    </ListItemButton>
+      <CustomTabPanel value={value} index={1}>
+        <BarChart
+          sx={{ backgroundColor: "#242424", borderRadius: '10px' }}
+          xAxis={[{ scaleType: 'band', data: months }]}
+          series={[{ data: [4000, 3000, 5000, 600] }]}
+          colors={['#95352e']}
+          height={250}
+        />
+      </CustomTabPanel>
 
-                    <ListItemButton onClick={() =>handleChange(3)}>
-                        <ListItemIcon>
-                            <SavingsOutlined />
-                        </ListItemIcon>
-                        <ListItemText primary="Investments" />    
-                    </ListItemButton>
+      <CustomTabPanel value={value} index={2}>
+        <BarChart
+          sx={{ backgroundColor: "#242424", borderRadius: '10px' }}
+          xAxis={[{ scaleType: 'band', data: months }]}
+          series={[{ data: [4000, 3000, 5000, 600] }]}
+          colors={['#6aa84f']}
+          height={250}
+        />
+      </CustomTabPanel>
 
-                    <ListItemButton onClick={() =>handleChange(4)}>
-                        <ListItemIcon>
-                            <MoneyOffOutlined />
-                        </ListItemIcon>
-                        <ListItemText primary="Debts" />    
-                    </ListItemButton>
-
-                </List>
-            </Box>
-            <Divider className={"col-md-1"} />
-                <Caurosel selected={selected} />
-        </Box>
-    )
+      <CustomTabPanel value={value} index={3}>
+        <BarChart
+          sx={{ backgroundColor: "#242424", borderRadius: '10px' }}
+          xAxis={[{ scaleType: 'band', data: months }]}
+          series={[{ data: [4000, 3000, 5000, 600] }]}
+          colors={['#95352e']}
+          height={250}
+        />
+      </CustomTabPanel>
+    </Box>
+  )
 }
 
 export default HomeScreen
