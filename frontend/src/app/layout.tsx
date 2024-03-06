@@ -13,7 +13,7 @@ import { darkTheme } from "./theme";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Finaces",
+  title: "Finances",
   description: "Powered by Besigne",
 };
 

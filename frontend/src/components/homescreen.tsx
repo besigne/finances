@@ -12,7 +12,7 @@ const HomeScreen: React.FC = () => {
       };
     
     return (
-        <Box className="row m-2 p-2" sx={{backgroundColor:"#1e1e1e", borderRadius: '10px'}}>
+        <Box className="row m-4 p-2" sx={{backgroundColor:"#1e1e1e", borderRadius: '10px'}}>
             <Box className={"col-md-3 ms-auto p-3"} sx={{backgroundColor:"#242424", borderRadius: '10px'}}>
                 <Typography>
                     General View

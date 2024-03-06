@@ -7,7 +7,9 @@ import Projection from '@/components/projection';
 export default function Home() {
   return (
     <>
-      <Menu />
+      <Box className="container">
+        <Menu />
+      </Box>
       <Box className="container">
         <HomeScreen />
         <Projection />
