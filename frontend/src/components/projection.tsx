@@ -17,8 +17,9 @@ const Projection: React.FC = () => {
       <Box className={'col-lg-12'}>
 
         <Tabs value={value} onChange={handleChange}>
-          <Tab label="line" {...allyProps(0)} />
-          <Tab label="bars" {...allyProps(1)} />
+          <Tab label="Balance" {...allyProps(0)} />
+          <Tab label="Investments" {...allyProps(1)} />
+          <Tab label="Debts" {...allyProps(2)} />
         </Tabs>
 
         <CustomTabPanel value={value} index={0}>
@@ -34,7 +35,7 @@ const Projection: React.FC = () => {
               {
                 id: "Spent",
                 label: "Spent",
-                data: [3420, 3840, 4120, 3120, 2570],
+                data: [3420, 3840, 4120, 3120, 3570],
               },
             ]}
             height={350}
@@ -43,23 +44,32 @@ const Projection: React.FC = () => {
         </CustomTabPanel>
 
         <CustomTabPanel value={value} index={1}>
-          <BarChart
+          <LineChart
             xAxis={[{ scaleType: 'band', data: months }]}
             sx={{ backgroundColor: "#242424", borderRadius: '10px' }}
             series={[
               {
-                id: "Income",
-                label: "Income",
+                id: "Invested",
                 data: [4440, 4450, 4320, 4550, 4400],
-              },
+              }
+            ]}
+            height={350}
+            colors={['#6aa84f']}
+          />
+        </CustomTabPanel>
+
+        <CustomTabPanel value={value} index={2}>
+          <LineChart
+            xAxis={[{ scaleType: 'band', data: months }]}
+            sx={{ backgroundColor: "#242424", borderRadius: '10px' }}
+            series={[
               {
                 id: "Spent",
-                label: "Spent",
-                data: [3420, 3840, 4120, 3120, 2570],
+                data: [3420, 3840, 4120, 3120, 3570],
               },
             ]}
             height={350}
-            colors={['#6aa84f', '#95352e']}
+            colors={['#95352e']}
           />
         </CustomTabPanel>
       </Box>
