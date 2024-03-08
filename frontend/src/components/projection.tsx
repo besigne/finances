@@ -1,9 +1,10 @@
 'use client'
-import { Box, Tab, Tabs, Typography } from '@mui/material';
-import { BarChart, LineChart } from '@mui/x-charts';
 import React from 'react';
+import { Box, Tab, Tabs } from '@mui/material';
+import { LineChart } from '@mui/x-charts';
 import { months } from './enum/enums';
 import { CustomTabPanel, allyProps } from './home/functions';
+import { AlignVerticalBottomOutlined, MoneyOffOutlined, SavingsOutlined } from '@mui/icons-material';
 
 const Projection: React.FC = () => {
   const [value, setValue] = React.useState(0);
@@ -17,9 +18,9 @@ const Projection: React.FC = () => {
       <Box className={'col-lg-12'}>
 
         <Tabs value={value} onChange={handleChange}>
-          <Tab label="Balance" {...allyProps(0)} />
-          <Tab label="Investments" {...allyProps(1)} />
-          <Tab label="Debts" {...allyProps(2)} />
+          <Tab label="Balance" icon={<AlignVerticalBottomOutlined />} iconPosition='start' {...allyProps(0)} />
+          <Tab label="Investments" icon={<SavingsOutlined />} iconPosition='start' {...allyProps(1)} />
+          <Tab label="Debts" icon={<MoneyOffOutlined />} iconPosition='start' {...allyProps(2)} />
         </Tabs>
 
         <CustomTabPanel value={value} index={0}>
