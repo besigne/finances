@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import { Box, Tab, Tabs } from '@mui/material';
-import { SavingsOutlined, MoneyOffOutlined, AlignVerticalTopOutlined, AlignVerticalBottomOutlined } from '@mui/icons-material';
+import { SavingsOutlined, MoneyOffOutlined, AlignVerticalBottomOutlined } from '@mui/icons-material';
 import { CustomTabPanel, allyProps } from './home/functions';
 import { BarChart } from '@mui/x-charts';
 import { months } from './enum/enums';
@@ -26,7 +26,7 @@ const HomeScreen: React.FC = () => {
         <BarChart
           sx={{ backgroundColor: "#242424", borderRadius: '10px' }}
           xAxis={[{ scaleType: 'band', data: months }]}
-          series={[ {
+          series={[{
             id: "Income",
             label: "Income",
             data: [4440, 4450, 4320, 4550, 4400],
