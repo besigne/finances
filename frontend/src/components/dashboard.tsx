@@ -1,16 +1,19 @@
 'use client'
 import React, { useEffect } from 'react';
-import { Box, Button, FormControl, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent, Slider, Theme, Typography, useTheme } from "@mui/material"
+import { Box, Button, FormControl, InputLabel, MenuItem, Modal, OutlinedInput, Select, SelectChangeEvent, Slider, Theme, Typography, useTheme } from "@mui/material"
 import { months, types, series } from './enum/enums';
 import { BarChart } from '@mui/x-charts';
+import { DataGrid } from '@mui/x-data-grid';
+import { columns, rows } from './dashboard/functions';
 
 interface SelectedSeries {
-    id: string
-    label: string
-    data: number[]
+  id: string
+  label: string
+  data: number[]
 }
 
 const DashboardTable: React.FC = () => {
+  const [newOpen, setNewOpen] = React.useState(false);
   const [selectedMonths, setSelectedMonths] = React.useState<string[]>([]);
   const [selectedTypes, setSelectedTypes] = React.useState<string[]>([]);
   const [selectedSeries, setSelectedSeries] = React.useState<SelectedSeries[]>([]);
@@ -35,23 +38,32 @@ const DashboardTable: React.FC = () => {
     );
   };
 
+  const handleNewClose = () => {
+    setNewOpen(!newOpen)
+  }
+
   useEffect(() => {
   }, [])
 
   return (
     <>
-      <Box className="row m-4 p-2 justify-content-center align-items-center" sx={{ backgroundColor: "#1e1e1e", borderRadius: '10px' }}>
-        <FormControl className="col-2 m-1 p-2">
+    <Modal
+      open={newOpen}
+      onClose={handleNewClose}
+      >
+        <Box>hello</Box>
+      </Modal>
+      <Box className="row m-4 justify-content-center align-items-center" sx={{ backgroundColor: "#1e1e1e", borderRadius: '10px' }}>
+        <FormControl variant='standard' className="col-2 m-1 p-2">
 
-          <InputLabel id="demo-multiple-name-label">Type</InputLabel>
+          <InputLabel className="ml-4 mt-2">Type</InputLabel>
           <Select
-            labelId="demo-multiple-name-label"
-            id="demo-multiple-name"
+            labelId="demo-simple-select-filled-label"
+            id="demo-simple-select-filled"
             multiple
+            label="Type"
             value={selectedTypes}
             onChange={handleChangeTypes}
-            input={<OutlinedInput label="Month" />}
-            size='small'
           >
             {types.map((name) => (
               <MenuItem
@@ -64,16 +76,14 @@ const DashboardTable: React.FC = () => {
           </Select>
         </FormControl>
 
-        <FormControl className="col-2 m-1 p-2">
-          <InputLabel>Month</InputLabel>
+        <FormControl variant='standard' className="col-2 m-1 p-2">
+          <InputLabel className="ml-4 mt-2">Month</InputLabel>
           <Select
             labelId="demo-multiple-name-label"
             id="demo-multiple-name"
             multiple
             value={selectedMonths}
             onChange={handleChangeMonth}
-            input={<OutlinedInput label="Month" />}
-            size='small'
           >
             {months.map((name) => (
               <MenuItem
@@ -85,20 +95,34 @@ const DashboardTable: React.FC = () => {
             ))}
           </Select>
         </FormControl>
-
+{/* 
         <Box className="col-2 m-1">
           <Button className='col-12' variant="outlined" color='error'>Delete</Button>
-        </Box>
+        </Box> */}
       </Box>
       <Box className="row m-4 p-2" sx={{ backgroundColor: "#1e1e1e", borderRadius: '10px' }}>
         <BarChart
           height={350}
-          xAxis={[{ scaleType: 'band', data: selectedItems}]}
+          xAxis={[{ scaleType: 'band', data: selectedItems }]}
           series={selectedSeries}
         />
       </Box>
       <Box className="row m-4 p-2" sx={{ backgroundColor: "#1e1e1e", borderRadius: '10px' }}>
-
+        <Button onClick={handleNewClose}>Criar</Button>
+      </Box>
+      <Box className="row m-4 p-2" sx={{ backgroundColor: "#1e1e1e", borderRadius: '10px' }}>
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                initialState={{
+                  pagination: {
+                    paginationModel: { page: 0, pageSize: 5}
+                  }
+                }}
+                pageSizeOptions={[5, 10]}
+                onCellDoubleClick={(e) => console.log(e)}
+                showCellVerticalBorder={false}
+                />
       </Box>
     </>
   )
