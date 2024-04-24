@@ -3,8 +3,9 @@ import React, { useEffect } from 'react';
 import { Box, Button, FormControl, InputLabel, MenuItem, Modal, OutlinedInput, Select, SelectChangeEvent, Slider, Theme, Typography, useTheme } from "@mui/material"
 import { months, types, series } from './enum/enums';
 import { BarChart } from '@mui/x-charts';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridPagination } from '@mui/x-data-grid';
 import { columns, rows } from './dashboard/functions';
+import { Money } from '@mui/icons-material';
 
 interface SelectedSeries {
   id: string
@@ -47,9 +48,9 @@ const DashboardTable: React.FC = () => {
 
   return (
     <>
-    <Modal
-      open={newOpen}
-      onClose={handleNewClose}
+      <Modal
+        open={newOpen}
+        onClose={handleNewClose}
       >
         <Box>hello</Box>
       </Modal>
@@ -95,10 +96,6 @@ const DashboardTable: React.FC = () => {
             ))}
           </Select>
         </FormControl>
-{/* 
-        <Box className="col-2 m-1">
-          <Button className='col-12' variant="outlined" color='error'>Delete</Button>
-        </Box> */}
       </Box>
       <Box className="row m-4 p-2" sx={{ backgroundColor: "#1e1e1e", borderRadius: '10px' }}>
         <BarChart
@@ -108,21 +105,35 @@ const DashboardTable: React.FC = () => {
         />
       </Box>
       <Box className="row m-4 p-2" sx={{ backgroundColor: "#1e1e1e", borderRadius: '10px' }}>
-        <Button onClick={handleNewClose}>Criar</Button>
-      </Box>
-      <Box className="row m-4 p-2" sx={{ backgroundColor: "#1e1e1e", borderRadius: '10px' }}>
-              <DataGrid
-                rows={rows}
-                columns={columns}
-                initialState={{
-                  pagination: {
-                    paginationModel: { page: 0, pageSize: 5}
-                  }
-                }}
-                pageSizeOptions={[5, 10]}
-                onCellDoubleClick={(e) => console.log(e)}
-                showCellVerticalBorder={false}
-                />
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 5 }
+            }
+          }}
+          pageSizeOptions={[5, 10]}
+          onCellDoubleClick={(e) => console.log(e)}
+          showCellVerticalBorder={false}
+          slots={{
+            footer: () => (
+              <>
+                <Box className="d-flex align-items-center">
+                  <Box className="col p-2">
+                    <Button
+                      onClick={handleNewClose}
+                      color="success"
+                      startIcon={<Money />}>
+                      Criar
+                    </Button>
+                  </Box>
+                  <GridPagination className="col" />
+                </Box>
+              </>
+            )
+          }}
+        />
       </Box>
     </>
   )
